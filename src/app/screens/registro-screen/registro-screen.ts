@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SHARED_IMPORTS } from '../../shared/shared.imports';
 import { Router } from '@angular/router';
+import { UsuariosService } from '../../services/usuarios-service';
 
 @Component({
   selector: 'app-registro-screen',
@@ -27,11 +28,18 @@ export class RegistroScreen implements OnInit {
   public edades: Array<{ value: number }> = [];
 
   constructor(
-    private readonly router: Router
+    private readonly router: Router,
+    private usuariosService: UsuariosService
   ) {}
 
   ngOnInit(): void {
     // Initialization logic here
+    //Vincular el esquema de usuario del servicio para inicializar el objeto user con las propiedades necesarias para el formulario de registro.
+    // Esto asegura que el objeto user tenga la estructura correcta y facilita la validación posterior.
+    this.user = this.usuariosService.esquemaUser();
+
+    // Se inia el array de edades para el select del formulario de registro.
+    this.llenarArrayEdades();
   }
 
   private llenarArrayEdades(): void {
@@ -46,6 +54,20 @@ export class RegistroScreen implements OnInit {
 
   public registrar(): void {
     // Lógica de registro aquí
+    if (this.isLoading) return;
+
+    // 1) Validación centralizada en UsuariosService
+    this.errors = this.usuariosService.validarUsuario(this.user);
+
+    // 2) Sin jQuery: si hay errores, se detiene
+    if (Object.keys(this.errors).length > 0) return;
+
+    // 3) Registro
+    this.isLoading = true;
+
+    //TODO: Aquí se llamaría al método de registro del servicio, pasando el objeto user.
+    //TODO: Luego, se manejaría la respuesta (éxito o error) para mostrar mensajes al usuario o navegar a otra pantalla.
+
   }
 
   public goLogin(): void {

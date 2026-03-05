@@ -29,7 +29,9 @@
             <mat-label>Correo Electrónico</mat-label>
             <input [(ngModel)]="username" type="email" matInput placeholder="Ingresa correo electrónico">
           </mat-form-field>
-          <div *ngIf="errors.username" class="invalid-feedback">{{ errors.username }}</div>
+          @if (errors.username) {
+            <div class="invalid-feedback">{{ errors.username }}</div>
+          }
 
           <!-- Contraseña -->
           <mat-form-field class="inputs-login" appearance="outline">
@@ -48,7 +50,9 @@
               {{ hide_1 ? 'visibility_off' : 'visibility' }}
             </mat-icon>
           </mat-form-field>
-          <div *ngIf="errors.password" class="invalid-feedback">{{ errors.password }}</div>
+          @if (errors.password) {
+            <div class="invalid-feedback">{{ errors.password }}</div>
+          }
 
            <!-- Recuperar contraseña -->
           <span class="label-pwd" style="cursor: pointer;" (click)="recuperarPwd()">
