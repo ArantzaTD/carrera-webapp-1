@@ -34,6 +34,11 @@ export class RegistroScreen implements OnInit {
     // Initialization logic here
   }
 
+  private llenarArrayEdades(): void {
+    // Igual a su lógica original (18..80)
+    this.edades = Array.from({ length: 63 }, (_, i) => ({ value: i + 18 }));
+  }
+
   public terminosCondiciones(): void {
     // Aquí puede abrir modal / navegar / etc.
     alert('Aquí se mostrarán los Términos y Condiciones.');
