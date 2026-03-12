@@ -1,0 +1,27 @@
+/* =========================================================
+   HOME - BASE (mobile-first)
+   ========================================================= */
+
+/* Contenedor principal de la pantalla */
+.home {
+  width: 100%;
+  min-height: 100vh;
+  background: #ffffff;
+}
+
+/* Drawer (sidebar) */
+.home__drawer {
+  width: 85vw;
+  /* mobile: ocupa la mayoría del ancho */
+  max-width: 340px;
+  /* límite razonable */
+  border-right: 0;
+}
+
+/* Contenido del drawer: aquí vive header + main */
+.home__content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+}
