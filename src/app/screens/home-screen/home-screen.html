@@ -1,0 +1,48 @@
+<!--
+  Sección principal del Home.
+  Mantener un contenedor único facilita mobile-first y evita wrappers innecesarios.
+-->
+
+<section class="home" aria-label="Pantalla principal">
+  <!--
+    Angular Material drawer:
+    - mat-drawer-container debe contener:
+      1) <mat-drawer> (el menú)
+      2) <mat-drawer-content> (todo el contenido principal)
+  -->
+  <mat-drawer-container class="home__drawer-container" autosize>
+    <!-- =========================
+         DRAWER (SIDEBAR)
+         ========================= -->
+    <mat-drawer #drawer class="home__drawer" mode="over" position="start" [opened]="drawerOpen"
+      (closedStart)="drawerOpen = false">
+      <!--
+        Left sidebar:
+        - isLogin: controla opciones mostradas
+        - closeSidebar: notifica a Home que debe cerrar el drawer
+      -->
+      <app-left-sidebar [isLogin]="isLogin" (closeSidebar)="closeSidebar()"></app-left-sidebar>
+    </mat-drawer>
+
+    <!-- =========================
+         CONTENIDO PRINCIPAL
+         ========================= -->
+    <mat-drawer-content class="home__content">
+      <!-- Header -->
+      <app-header-app (menuToggle)="toggleSidebar()"></app-header-app>
+
+      <!-- =========================
+           BODY
+           ========================= -->
+      <main class="body-home" role="main">
+        <!-- TODO: La siguiente clase, agregaremos todo lo relacionado al contenido del home -->
+
+        <!-- 6) Footer -->
+        <section class="footer" aria-label="Pie de página">
+          <app-footer-app [showLicensed]="showLicensed" (privacyClick)="openPrivacy()"
+            (termsClick)="openTerms()"></app-footer-app>
+        </section>
+      </main>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</section>
