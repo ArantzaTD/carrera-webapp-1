@@ -24,8 +24,31 @@ export class RegistroScreen implements OnInit {
   public hide_1 = true;
   public inputType_1: 'password' | 'text' = 'password';
 
+   /* Confirmar Password */
+  public hide_2 = true;
+  public inputType_2: 'password' | 'text' = 'password';
+
   /* Edades */
   public edades: Array<{ value: number }> = [];
+
+  /* Grados de estudio */
+  public gradosEstudio: string[] = [
+    'Preparatoria',
+    'Licenciatura',
+    'Maestría',
+    'Doctorado'
+  ];
+
+  /* Estados de la República Mexicana */
+  public estadosMX: string[] = [
+    'Aguascalientes', 'Baja California', 'Baja California Sur', 'Campeche',
+    'Chiapas', 'Chihuahua', 'Ciudad de México', 'Coahuila', 'Colima',
+    'Durango', 'Estado de México', 'Guanajuato', 'Guerrero', 'Hidalgo',
+    'Jalisco', 'Michoacán', 'Morelos', 'Nayarit', 'Nuevo León', 'Oaxaca',
+    'Puebla', 'Querétaro', 'Quintana Roo', 'San Luis Potosí', 'Sinaloa',
+    'Sonora', 'Tabasco', 'Tamaulipas', 'Tlaxcala', 'Veracruz', 'Yucatán',
+    'Zacatecas'
+  ];
 
   constructor(
     private readonly router: Router,
@@ -79,4 +102,33 @@ export class RegistroScreen implements OnInit {
     this.inputType_1 = this.hide_1 ? 'password' : 'text';
   }
 
+   /** Solo letras y espacios */
+  public soloTexto(event: KeyboardEvent): boolean {
+    const char = event.key;
+    if (char.length > 1) return true;
+    return /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]$/.test(char);
+  }
+
+  /** Solo alfanumérico sin espacios */
+  public soloAlfanumerico(event: KeyboardEvent): boolean {
+    const char = event.key;
+    if (char.length > 1) return true;
+    return /^[a-zA-Z0-9]$/.test(char);
+  }
+
+  /** Texto para dirección: letras, números, espacios, comas, puntos, # y guiones */
+  public textoDireccion(event: KeyboardEvent): boolean {
+    const char = event.key;
+    if (char.length > 1) return true;
+    return /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ0-9\s.,#\-]$/.test(char);
+  }
+
+  /** Convierte a mayúsculas en tiempo real (CURP y RFC) */
+  public toUpperCase(field: string): void {
+    if (this.user[field]) {
+      this.user[field] = this.user[field].toUpperCase();
+    }
+  }
 }
+
+
