@@ -20,11 +20,28 @@
         </picture>
       </div>
     </div>
+
     <!-- Columna/Sección derecha: formulario registro -->
     <div class="section-right">
       <div class="registro-body">
         <div class="form-registro">
           <h1 class="title-login">Regístrate</h1>
+
+          <!-- ID de usuario -->
+          <mat-form-field class="inputs-login" appearance="outline">
+            <mat-label>ID de Usuario</mat-label>
+            <input
+              [(ngModel)]="user.user_id"
+              type="text"
+              matInput
+              placeholder="8 caracteres alfanuméricos"
+              maxlength="8"
+              (keypress)="soloAlfanumerico($event)"
+            >
+          </mat-form-field>
+          @if (errors.user_id) {
+            <div class="invalid-feedback">{{ errors.user_id }}</div>
+          }
 
           <!-- Nombre -->
           <mat-form-field class="inputs-login" appearance="outline">
@@ -63,6 +80,93 @@
           </mat-form-field>
           @if (errors.password) {
           <div class="invalid-feedback">{{ errors.password }}</div>
+          }
+
+          <!-- Confirmar contraseña -->
+          <mat-form-field class="inputs-login" appearance="outline">
+            <mat-label>Confirmar Contraseña</mat-label>
+            <input [(ngModel)]="user.confirm_password" [type]="inputType_2" matInput placeholder="Confirma tu contraseña">
+            <mat-icon matSuffix class="eye-icon" (click)="showConfirmPassword()">
+              {{ hide_2 ? 'visibility_off' : 'visibility' }}
+            </mat-icon>
+          </mat-form-field>
+          @if (errors.confirm_password) {
+            <div class="invalid-feedback">{{ errors.confirm_password }}</div>
+          }
+
+          <!-- CURP -->
+          <mat-form-field class="inputs-login" appearance="outline">
+            <mat-label>CURP</mat-label>
+            <input
+              [(ngModel)]="user.curp"
+              type="text"
+              matInput
+              placeholder="Ej. XXXX000000HXXXXX00"
+              maxlength="18"
+              (keypress)="soloAlfanumerico($event)"
+              (ngModelChange)="toUpperCase('curp')"
+            >
+          </mat-form-field>
+          @if (errors.curp) {
+            <div class="invalid-feedback">{{ errors.curp }}</div>
+          }
+
+          <!-- RFC -->
+          <mat-form-field class="inputs-login" appearance="outline">
+            <mat-label>RFC</mat-label>
+            <input
+              [(ngModel)]="user.rfc"
+              type="text"
+              matInput
+              placeholder="Ej. XXXX000000XXX"
+              maxlength="13"
+              (keypress)="soloAlfanumerico($event)"
+              (ngModelChange)="toUpperCase('rfc')"
+            >
+          </mat-form-field>
+          @if (errors.rfc) {
+            <div class="invalid-feedback">{{ errors.rfc }}</div>
+          }
+
+          <!-- Grado de estudios -->
+          <mat-form-field appearance="outline" class="inputs-login">
+            <mat-label>Grado de Estudios</mat-label>
+            <mat-select [(ngModel)]="user.grado_estudios" name="grado_estudios">
+              @for (grado of gradosEstudio; track grado) {
+                <mat-option [value]="grado">{{ grado }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+          @if (errors.grado_estudios) {
+            <div class="invalid-feedback">{{ errors.grado_estudios }}</div>
+          }
+
+          <!-- Dirección -->
+          <mat-form-field class="inputs-login" appearance="outline">
+            <mat-label>Dirección</mat-label>
+            <input
+              [(ngModel)]="user.direccion"
+              type="text"
+              matInput
+              placeholder="Calle, número, colonia"
+              (keypress)="textoDireccion($event)"
+            >
+          </mat-form-field>
+          @if (errors.direccion) {
+            <div class="invalid-feedback">{{ errors.direccion }}</div>
+          }
+
+          <!-- Estado -->
+          <mat-form-field appearance="outline" class="inputs-login">
+            <mat-label>Estado</mat-label>
+            <mat-select [(ngModel)]="user.estado" name="estado">
+              @for (estado of estadosMX; track estado) {
+                <mat-option [value]="estado">{{ estado }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+          @if (errors.estado) {
+            <div class="invalid-feedback">{{ errors.estado }}</div>
           }
 
           <!-- Teléfono -->
