@@ -79,3 +79,14 @@ h1, h2, h3, h4 {
   font-size: 0.875rem;
 }
 
+/* =========================================================
+   Fix: panel de mat-select siempre encima del contenido
+   ========================================================= */
+.cdk-overlay-container {
+  z-index: 1100 !important;
+}
+ 
+.mat-mdc-select-panel {
+  max-height: 240px !important;
+  overflow-y: auto !important;
+}

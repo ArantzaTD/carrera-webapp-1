@@ -6,7 +6,7 @@ import { catchError, Observable, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 export interface RegistroUser {
-  user_id = string;
+  user_id: string;
   first_name: string;
   last_name: string;
   email: string;

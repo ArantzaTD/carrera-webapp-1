@@ -102,6 +102,11 @@ export class RegistroScreen implements OnInit {
     this.inputType_1 = this.hide_1 ? 'password' : 'text';
   }
 
+  public showConfirmPassword(): void {
+    this.hide_2 = !this.hide_2;
+    this.inputType_2 = this.hide_2 ? 'password' : 'text';
+  }
+
    /** Solo letras y espacios */
   public soloTexto(event: KeyboardEvent): boolean {
     const char = event.key;
